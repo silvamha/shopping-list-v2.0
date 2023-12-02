@@ -1,12 +1,48 @@
+<!-- 
+This is the HTML code for the Shopping List v2.0 application. 
+
+Purpose of the application:
+The purpose of this application is to allow users to create a shopping list by entering items and their prices. Users can mark items as purchased by checking a checkbox.
+
+Functionality:
+1. The user enters an item in an input box.
+2. The user clicks a button to add the item to the shopping list. This dynamically creates a checkbox with the item label and an empty input field for the price.
+3. Once the shopping list is complete, the user can add the price of each purchased item and check the checkbox to indicate it has been purchased.
+4. The price of each item is stored and can be used later.
+
+File Path: /c:/Users/silva/OneDrive/Desktop/Projects/Frontend Path/Projects/Shopping List v2.0/index.html
+-->
+
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/css/styles.css">
-  <title>Document</title>
-</head>
-<body>
-  <script src="/index.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/styles.css" />
+    <title>Shopping List v 2.0</title>
+  </head>
+  <body>
+    <!--Item and price information to be input by uyser and updated to to shopping list-->
+    <div class="input-item-container" id="input-item-container">
+      <div class="item-name-container">
+         <label for="input-el" class="input-label" id="input-label">Item:</label>
+      <input type="text" class="input-el" id="input-el" />  
+      </div>
+      <div class="item-price-container">
+        <label for="input-price-el" class="input-price-label" id="input-price-label">Price:</label>
+     <input type="number" class="input-price-el" id="input-price-el" />  
+     </div>
+      <button class="enter-items" id="enter-items">Enter Items</button>
+    </div>
+
+    <div class="list-container" id="list-container"></div>
+
+
+  
+
+    
+
+
+    <script src="/index.js" type="module"></script>
+  </body>
 </html>

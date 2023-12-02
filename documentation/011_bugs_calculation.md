@@ -1,0 +1,4 @@
+## 01 Bugs to be fixed
+1. The items purchased should be initialized to 0 because not all items will be purchased
+2. The calculation between the database and the DOM do not match, also if the user makes a change from buy 2 items to 1 item the numbers on the DOM and database do not automatically adjust. For example, if I buy 2 items, then the actual price and fixed price should increase by two. If I change my mind and buy 1 item, the actual price and original price should go back to their original values. This calculation is important because it will be used for future analysis and the system should behave accordingly.
+3. When I increase the number of items, the fixed price displayed on the DOM is different from the price stored in Firebase.
