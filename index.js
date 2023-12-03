@@ -8,10 +8,6 @@ Shopping List
 3. Once the shopping list is complete, the user will add the price of the item purchased and check the checkbox to indicate the item has been purchased. 
 4. The price of each item is to be stored and added in a different variable for later use
  */
-
-import { tesVar } from "./data.js";
-console.log(tesVar);
-
 // Install Firebase
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
 import {
@@ -115,10 +111,6 @@ inputEl.value = ""; //Cledar input field after user clicks the button
  * @param {string} fixedPriceValue - The value of the fixed price.
  */
 
-// ChatGPT Suggestion
-// Function to dynamically create and append elements to the DOM
-//
-
 // Function to dynamically create and append elements to the DOM
 const createElements = (
   itemValue,
@@ -184,22 +176,7 @@ const createElements = (
     updateItemInFirebase(uniqueKey, { actualPrice: updatedPrice });
   });
 
-  // // *****wORKING CODE BUT UPDATES FIREBASE AND DOM WITH DIFFERENT VALUES********
-  // numberOfItemsInput.addEventListener("change", (event) => {
-  //   event.stopPropagation();
-  //   const updatedNumberOfItems = parseInt(event.target.value, 10) || 1;
-  //   const updatedFixedPrice = (
-  //     parseFloat(fixedPriceValue) * updatedNumberOfItems
-  //   ).toFixed(2);
-  //   fixedPriceDisplay.value = updatedFixedPrice;
-  //   updateItemInFirebase(uniqueKey, {
-  //     numberOfItems: updatedNumberOfItems,
-  //     fixedPrice: updatedFixedPrice,
-  //   });
-  // });
-
-  // ****CHATGPT SUGGESTION********
-  // Event listener for when the number of items is updated
+    // Event listener for when the number of items is updated
   numberOfItemsInput.addEventListener("change", (event) => {
     event.stopPropagation(); // Stop the event from bubbling up the DOM tree
   
@@ -230,22 +207,6 @@ const createElements = (
     });
   });
   
-// // ****Coder Assistant SUGGESTION********
-// // DOES NOT APPEAR TO WORK AS INTENDED
-// //The code below updates Firebase and  the DOM with different values
-// numberOfItemsInput.addEventListener("change", (event) => {
-//   event.stopPropagation();
-//   const updatedNumberOfItems = parseInt(event.target.value, 10) || 0;
-//   const updatedTotalFixedPrice = (fixedPriceValue * updatedNumberOfItems).toFixed(2);
-
-//   fixedPriceDisplay.value = updatedTotalFixedPrice;
-
-//   updateItemInFirebase(uniqueKey, {
-//     numberOfItems: updatedNumberOfItems,
-//     fixedPrice: updatedTotalFixedPrice,
-//   });
-// });
-
 
   isPurchasedCheckbox.addEventListener("change", (event) => {
     event.stopPropagation();
@@ -277,7 +238,3 @@ function updateItemInFirebase(itemId, updateObject) {
 }
 
 
-console.log("index.js");
-console.log("version1");// Version 1
-console.log("index.js");
-console.log("version1");git
