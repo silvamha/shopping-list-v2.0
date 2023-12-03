@@ -9,6 +9,9 @@ Shopping List
 4. The price of each item is to be stored and added in a different variable for later use
  */
 
+import { tesVar } from "./data.js";
+console.log(tesVar);
+
 // Install Firebase
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
 import {
@@ -272,3 +275,7 @@ function updateItemInFirebase(itemId, updateObject) {
     console.error("Error updating item in Firebase", error);
   });
 }
+
+
+console.log("index.js");
+console.log("version1");// Version 1
