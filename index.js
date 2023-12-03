@@ -279,3 +279,5 @@ function updateItemInFirebase(itemId, updateObject) {
 
 console.log("index.js");
 console.log("version1");// Version 1
+console.log("index.js");
+console.log("version1");git
