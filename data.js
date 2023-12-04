@@ -1,1 +1,0 @@
-export const tesVar = "This is only a test"
