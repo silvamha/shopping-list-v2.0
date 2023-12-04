@@ -18,6 +18,10 @@ File Path: /c:/Users/silva/OneDrive/Desktop/Projects/Frontend Path/Projects/Shop
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
     <link rel="stylesheet" href="/css/styles.css" />
     <title>Shopping List v 2.0</title>
   </head>
@@ -25,23 +29,22 @@ File Path: /c:/Users/silva/OneDrive/Desktop/Projects/Frontend Path/Projects/Shop
     <!--Item and price information to be input by uyser and updated to to shopping list-->
     <div class="input-item-container" id="input-item-container">
       <div class="item-name-container">
-         <label for="input-el" class="input-label" id="input-label">Item:</label>
-      <input type="text" class="input-el" id="input-el" />  
+        <label for="input-el" class="input-label" id="input-label">Item:</label>
+        <input type="text" class="input-el" id="input-el" />
       </div>
       <div class="item-price-container">
-        <label for="input-price-el" class="input-price-label" id="input-price-label">Price:</label>
-     <input type="number" class="input-price-el" id="input-price-el" />  
-     </div>
+        <label
+          for="input-price-el"
+          class="input-price-label"
+          id="input-price-label"
+          >Price:</label
+        >
+        <input type="number" class="input-price-el" id="input-price-el" />
+      </div>
       <button class="enter-items" id="enter-items">Enter Items</button>
     </div>
 
     <div class="list-container" id="list-container"></div>
-
-
-  
-
-    
-
 
     <script src="/index.js" type="module"></script>
   </body>
