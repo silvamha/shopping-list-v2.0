@@ -16,7 +16,6 @@ import {
   push,
   set,
   onValue,
-  update,
 } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js";
 
 const appSettings = {
@@ -239,5 +238,6 @@ function updateItemInFirebase(itemId, updateObject) {
 
 console.log("Hello World");
 
-console.log(2+2)
+console.log(2/2)
+
 
