@@ -9,6 +9,8 @@ Shopping List
 4. The price of each item is to be stored and added in a different variable for later use
  */
 // Install Firebase
+// Sample data to test git and github connection
+import { sampleData } from "./data.js";
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
 import {
   getDatabase,
