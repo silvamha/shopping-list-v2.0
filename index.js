@@ -70,6 +70,7 @@ const listItemsArray = [
 const uniqueId = `item-${listItemsArray.length + 1}`;
 const listContainerDIV = document.querySelector("#list-container");
 listContainerDIV.classList.add("list-container");
+console.log(listContainerDIV.classList)
 
 // ChatGPT Suggestion
 // Event listener for the add button
@@ -77,6 +78,7 @@ btnEl.addEventListener("click", function () {
   // Trim values to remove unnecessary whitespace
   const inputElValue = inputEl.value.trim();
   const inputFixedPriceElValue = inputFixedPriceEl.value.trim();
+  const selectedCategory = document.getElementById("categoryDropdown").value; // Get the selected category
 
   // Only proceed if both fields have values
   if (inputElValue && inputFixedPriceElValue) {
@@ -87,7 +89,8 @@ btnEl.addEventListener("click", function () {
       fixedPrice: inputFixedPriceElValue,
       actualPrice: 0, // Initialize with a default value
       numberOfItems: 0, // Initialize with a default value
-      isPurchased: false, // Default is not purchased
+      isPurchased: false,
+      category: selectedCategory // Add the selected category here
     };
 
     // GPT suggestion*******
@@ -122,7 +125,8 @@ const createElements = (
   uniqueKey,
   actualPrice,
   isPurchased,
-  numberOfItems
+  numberOfItems,
+  category,
 ) => {
   // Create a new div to hold the item details
   const itemContainer = document.createElement("div");
