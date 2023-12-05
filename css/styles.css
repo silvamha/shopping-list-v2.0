@@ -6,7 +6,7 @@
 
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #f8f9fa;
+    background-color: #B6BBC4;
     color: #333;
     line-height: 1.6;
     padding: 1.25em;
@@ -19,7 +19,7 @@ body {
     margin: 1.25em auto;
     border: 0.0625em solid #ddd;
     padding: 1.25em;
-    background: #fff;
+    background: #F0ECE5;
     border-radius: 5px;
     box-shadow: 0 .125 .25em rgba(0, 0, 0, 0.1);
 }
@@ -29,15 +29,13 @@ body {
     max-width: 600px;
     max-height: 400px; /* Add your desired maximum height here */
     overflow: auto; /* This will add scroll bars if the content exceeds the max height */
-    margin: auto;
+    margin: .625em auto;
     border:0.0625em solid #ddd; /* Corrected the border property */
     padding: 1.25em;
-    background: #fff;
+    background: #EEF5FF;
     border-radius: 5px;
     box-shadow: 0 .125em .25em rgba(0, 0, 0, 0.1);
 }
-
-
 
 .list-item-container {
     display: flex;
@@ -68,7 +66,7 @@ body {
 }
 
 button {
-    background: #007bff;
+    background: #31304D;
     color: #fff;
     border: none;
     padding: 0.625em 1.25em;
@@ -142,6 +140,5 @@ button:disabled {
 
     .number-of-items-input {
       width: 10%;
-      background-color: red;
     }
 }
