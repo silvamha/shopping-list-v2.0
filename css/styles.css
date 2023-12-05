@@ -9,31 +9,34 @@ body {
     background-color: #f8f9fa;
     color: #333;
     line-height: 1.6;
-    padding: 20px;
+    padding: 1.25em;
 }
 
 #input-item-container {
     display: flex;
     flex-direction: column;
     max-width: 600px;
-    margin: 20px auto;
-    border: 1px solid #ddd;
-    padding: 20px;
+    margin: 1.25em auto;
+    border: 0.0625em solid #ddd;
+    padding: 1.25em;
     background: #fff;
     border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 .125 .25em rgba(0, 0, 0, 0.1);
 }
 
 
 #list-container {
     max-width: 600px;
+    max-height: 400px; /* Add your desired maximum height here */
+    overflow: auto; /* This will add scroll bars if the content exceeds the max height */
     margin: auto;
-    border: 1px solid #ddd;
-    padding: 20px;
+    border:0.0625em solid #ddd; /* Corrected the border property */
+    padding: 1.25em;
     background: #fff;
     border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 .125em .25em rgba(0, 0, 0, 0.1);
 }
+
 
 
 .list-item-container {
@@ -41,38 +44,38 @@ body {
     align-items: center;
     justify-content: center;
     /* margin-bottom: 10px; */
-    gap: 10px;
+    gap: .625em;
 }
 
 .list-item-container label {
     flex: 1;
-    margin-right: 10px;
+    margin-right: .625em;
 }
 
 .list-item-container input[type="text"],
 .list-item-container input[type="number"] {
-    padding: 5px;
-    border: 1px solid #ddd;
-    border-radius: 3px;
+    padding: 0.3125em;
+    border: 0.0625em solid #ddd;
+    border-radius: 0.1875em;
     flex: 1;
     align-items: center;
 }
 
 .list-item-container input[type="checkbox"] {
-    margin-left: 10px;
+    margin-left: 0.625em;
     align-items: center;
- 
+
 }
 
 button {
     background: #007bff;
     color: #fff;
     border: none;
-    padding: 10px 20px;
+    padding: 0.625em 1.25em;
     border-radius: 5px;
     cursor: pointer;
     width: 100%;
-    margin-top: 10px;
+    margin-top: 0.3125em;
 
 }
 
@@ -83,10 +86,10 @@ button:hover {
 input[type="text"],
 input[type="number"] {
     width: 100%;
-    padding: 8px;
-    margin-bottom: 10px;
-    border-radius: 3px;
-    border: 1px solid #ddd;
+    padding: 0.5em;
+    margin-bottom: 0.625em;
+    border-radius: 0.1875em;
+    border: 0.0625em solid #ddd;
 }
 
 input[type="text"]:focus,
@@ -110,12 +113,35 @@ button:disabled {
 
 @media (max-width: 768px) {
     .list-item-container {
-        flex-direction: column;
+        flex-direction: row;
         align-items: stretch;
     }
 
     .list-item-container label {
-        margin-bottom: 5px;
+        margin-bottom: 0.3125em;
+    }
+
+    .fixed-price {
+      display: none;
     }
 }
 
+@media (max-width: 500px) {
+    .list-item-container {
+        flex-direction: row;
+        align-items: wrap;
+    }
+
+    .list-item-container label {
+        margin-bottom: 0.3125em;        
+    }
+
+    .fixed-price {
+      display: none;
+    }
+
+    .number-of-items-input {
+      width: 10%;
+      background-color: red;
+    }
+}
