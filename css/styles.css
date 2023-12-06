@@ -5,7 +5,8 @@
 }
 
 body {
-    font-family: 'Roboto', sans-serif;    background-color: #B6BBC4;
+    font-family: 'Roboto', sans-serif;
+    background-color: #B6BBC4;
     color: #333;
     line-height: 1.6;
     padding: 1.25em;
@@ -27,10 +28,13 @@ body {
 
 #list-container {
     max-width: 600px;
-    max-height: 400px; /* Add your desired maximum height here */
-    overflow: auto; /* This will add scroll bars if the content exceeds the max height */
+    max-height: 400px;
+    /* Add your desired maximum height here */
+    overflow: auto;
+    /* This will add scroll bars if the content exceeds the max height */
     margin: .625em auto;
-    border:0.0625em solid #ddd; /* Corrected the border property */
+    border: 0.0625em solid #ddd;
+    /* Corrected the border property */
     padding: 1.25em;
     background: #9DB2BF;
     border-radius: 5px;
@@ -40,7 +44,7 @@ body {
 
 
 
-.category-container{
+.category-container {
     display: flex;
     flex-direction: column;
     padding: 0.625em;
@@ -48,13 +52,13 @@ body {
     background-color: #9BBEC8;
     gap: 0.625em;
     margin: 1em auto;
-    border: 0.0625em solid #ddd;    
-    border-radius:0.6125em ;
+    border: 0.0625em solid #ddd;
+    border-radius: 0.6125em;
     box-shadow: 0 .125em .25em rgba(0, 0, 0, 0.1);
     font-family: 'Roboto', sans-serif;
 }
 
-.category-title{
+.category-title {
     margin-left: 0.625em;
     color: #31304D;
 }
@@ -142,25 +146,33 @@ button:disabled {
     }
 
     .fixed-price {
-      display: none;
+        display: none;
     }
 }
 
 @media (max-width: 500px) {
     .list-item-container {
-        flex-direction: row;
-        align-items: wrap;
+        flex-direction: column;
+        align-items: stretch;
+        border-radius: 1em;
     }
 
-    .list-item-container label {
-        margin-bottom: 0.3125em;        
-    }
-
-    .fixed-price {
-      display: none;
+    .list-item-container input[type="text"],
+    .list-item-container input[type="number"] {
+        width: auto;
+        /* Adjust the width as needed */
+        flex-grow: 1;
+        /* This makes the input fields grow to fill available space */
     }
 
     .number-of-items-input {
-      width: 10%;
+        width: 30%;
+        /* Adjust this width as needed */
+        flex-grow: 0;
+        /* Prevents the field from growing */
+    }
+
+    .fixed-price {
+        display: none;
     }
 }
