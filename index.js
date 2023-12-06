@@ -55,34 +55,78 @@ const dbRef = ref(database, "shoppingList");
 
 
 // *********************TEST*******************!SECTION
+// onValue(dbRef, (snapshot) => {
+//   listContainerDIV.innerHTML = ""; // Clear existing items
+//   const items = snapshot.val();
+  
+//   if (items) {
+//     // Convert object to an array for sorting
+//     const itemsArray = Object.keys(items).map(key => {
+//       return { ...items[key], key: key };
+//     });
+
+//     // Sort array by category
+//     itemsArray.sort((a, b) => a.category.localeCompare(b.category));
+
+//     // Iterate over sorted items and create elements for each
+//     itemsArray.forEach(item => {
+//       createElements(
+//         item.item,
+//         item.fixedPrice,
+//         item.key,
+//         item.actualPrice,
+//         item.isPurchased,
+//         item.numberOfItems,
+//         item.category
+//       );
+//     });
+//   }
+// });
+
+// **************TEST SECTION Add containers to categories*********!SECTION
 onValue(dbRef, (snapshot) => {
   listContainerDIV.innerHTML = ""; // Clear existing items
   const items = snapshot.val();
-  
-  if (items) {
-    // Convert object to an array for sorting
-    const itemsArray = Object.keys(items).map(key => {
-      return { ...items[key], key: key };
-    });
 
-    // Sort array by category
+  if (items) {
+    const itemsArray = Object.keys(items).map(key => ({ ...items[key], key }));
     itemsArray.sort((a, b) => a.category.localeCompare(b.category));
 
-    // Iterate over sorted items and create elements for each
+    const categoryGroups = {};
+
+    // Group items by category
     itemsArray.forEach(item => {
-      createElements(
-        item.item,
-        item.fixedPrice,
-        item.key,
-        item.actualPrice,
-        item.isPurchased,
-        item.numberOfItems,
-        item.category
-      );
+      if (!categoryGroups[item.category]) {
+        categoryGroups[item.category] = [];
+      }
+      categoryGroups[item.category].push(item);
+    });
+
+    // Create a container for each category and append items
+    Object.keys(categoryGroups).forEach(category => {
+      const categoryDiv = document.createElement("div");
+      categoryDiv.className = "category-container";
+      const categoryTitle = document.createElement("h4");
+      categoryTitle.className='category-title'
+      categoryTitle.textContent = category;
+      categoryDiv.appendChild(categoryTitle);
+
+      categoryGroups[category].forEach(item => {
+        createElements(
+          item.item,
+          item.fixedPrice,
+          item.key,
+          item.actualPrice,
+          item.isPurchased,
+          item.numberOfItems,
+          categoryDiv // Pass the category container instead of category name
+        );
+      });
+
+      listContainerDIV.appendChild(categoryDiv);
     });
   }
 });
-
 
 // Delcare variables for input element and button to input intems in the empty list
 const inputEl = document.querySelector("#input-el");
@@ -121,7 +165,8 @@ btnEl.addEventListener("click", function () {
       actualPrice: 0, // Initialize with a default value
       numberOfItems: 0, // Initialize with a default value
       isPurchased: false,
-      category: selectedCategory // Add the selected category here
+      // category: selectedCategory // Add the selected category here
+      categoryContainer // Changed parameter 
     };
 
     // GPT suggestion*******
@@ -157,7 +202,7 @@ const createElements = (
   actualPrice,
   isPurchased,
   numberOfItems,
-  category,
+  categoryContainer, // Changed parameter
 ) => {
 
   // Create a new div to hold the item details
@@ -274,6 +319,9 @@ itemContainer.appendChild(categoryDiv);
 
   // Append the item container to the main list container in the DOM
   listContainerDIV.appendChild(itemContainer);
+
+    // Append the item container to the passed category container
+    categoryContainer.appendChild(itemContainer);
 };
 
 // Helper function to update an item in Firebase
