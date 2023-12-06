@@ -34,23 +34,55 @@ const database = getDatabase(app);
 const dbRef = ref(database, "shoppingList");
 
 // ChatGPT Suggestion
+// onValue(dbRef, (snapshot) => {
+//   listContainerDIV.innerHTML = ""; // Clear existing items
+//   const items = snapshot.val();
+//   if (items) {
+//     Object.keys(items).forEach((key) => {
+//       const item = items[key];
+//       createElements(
+//         item.item,
+//         item.fixedPrice,
+//         key,
+//         item.actualPrice,
+//         item.isPurchased,
+//         item.numberOfItems,
+//         item.category
+//       );
+//     });
+//   }
+// });
+
+
+// *********************TEST*******************!SECTION
 onValue(dbRef, (snapshot) => {
   listContainerDIV.innerHTML = ""; // Clear existing items
   const items = snapshot.val();
+  
   if (items) {
-    Object.keys(items).forEach((key) => {
-      const item = items[key];
+    // Convert object to an array for sorting
+    const itemsArray = Object.keys(items).map(key => {
+      return { ...items[key], key: key };
+    });
+
+    // Sort array by category
+    itemsArray.sort((a, b) => a.category.localeCompare(b.category));
+
+    // Iterate over sorted items and create elements for each
+    itemsArray.forEach(item => {
       createElements(
         item.item,
         item.fixedPrice,
-        key,
+        item.key,
         item.actualPrice,
         item.isPurchased,
-        item.numberOfItems
+        item.numberOfItems,
+        item.category
       );
     });
   }
 });
+
 
 // Delcare variables for input element and button to input intems in the empty list
 const inputEl = document.querySelector("#input-el");
@@ -70,7 +102,6 @@ const listItemsArray = [
 const uniqueId = `item-${listItemsArray.length + 1}`;
 const listContainerDIV = document.querySelector("#list-container");
 listContainerDIV.classList.add("list-container");
-console.log(listContainerDIV.classList)
 
 // ChatGPT Suggestion
 // Event listener for the add button
@@ -128,9 +159,18 @@ const createElements = (
   numberOfItems,
   category,
 ) => {
+
   // Create a new div to hold the item details
   const itemContainer = document.createElement("div");
   itemContainer.className = "list-item-container";
+
+  // ***************TEST**************************!SECTION
+  // Inside your createElements function
+const categoryDiv = document.createElement("div");
+// categoryDiv.textContent = "Category: " + category;
+categoryDiv.textContent = "";
+itemContainer.appendChild(categoryDiv);
+
 
   // Input for displaying the item name
   const listItem = document.createElement("input");
@@ -158,7 +198,7 @@ const createElements = (
   const actualPriceInput = document.createElement("input");
   actualPriceInput.type = "number";
   actualPriceInput.className = "actual-price-input";
-  actualPriceInput.placeholder = "Enter actual price";
+  actualPriceInput.placeholder = "Actual Price";
   actualPriceInput.value = actualPrice || "";
   actualPriceInput.disabled = isPurchased;
 
@@ -215,7 +255,6 @@ const createElements = (
     });
   });
   
-
   isPurchasedCheckbox.addEventListener("change", (event) => {
     event.stopPropagation();
     const isChecked = event.target.checked;

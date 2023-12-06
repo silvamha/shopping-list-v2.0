@@ -133,3 +133,87 @@ const selectedCategory = document.querySelector("#category-select").value;
 ```
 
 Integrating this category-based sorting will significantly enhance the user experience by allowing them to find items more efficiently.
+
+## 03 Working Solution
+Yes, you should replace your existing `onValue` code with the new suggestion to implement the sorting feature. This change will allow your application to automatically sort the shopping list items by category each time data is fetched from Firebase. Here's a recap of what you need to do:
+
+### Replacing the `onValue` Function
+
+Replace your existing `onValue` function with the following:
+
+```javascript
+onValue(dbRef, (snapshot) => {
+  const items = snapshot.val();
+  if (items) {
+    displaySortedItems(items);
+  }
+});
+```
+
+### Implementing the `displaySortedItems` Function
+
+Make sure you have the `displaySortedItems` function in your code:
+
+```javascript
+function displaySortedItems(items) {
+  listContainerDIV.innerHTML = ""; // Clear existing items
+
+  // Convert items object to an array and sort it by category
+  const sortedItems = Object.values(items).sort((a, b) => {
+    return a.category.localeCompare(b.category);
+  });
+
+  // Create elements for each sorted item
+  sortedItems.forEach(item => {
+    createElements(
+      item.item,
+      item.fixedPrice,
+      item.key, // Make sure 'key' is stored in each item
+      item.actualPrice,
+      item.isPurchased,
+      item.numberOfItems,
+      item.category
+    );
+  });
+}
+```
+
+### Ensuring Keys are Stored in Firebase Items
+
+When adding new items to Firebase, ensure that each item has its unique key stored:
+
+```javascript
+push(dbRef, newItem).then((snapshot) => {
+  const uniqueKey = snapshot.key;
+  updateItemInFirebase(uniqueKey, { key: uniqueKey }); // Store the key in the item
+});
+```
+
+### Modifying `createElements` to Handle the Key
+
+Ensure your `createElements` function can handle the `key` parameter:
+
+```javascript
+const createElements = (
+  itemValue,
+  fixedPriceValue,
+  uniqueKey,
+  actualPrice,
+  isPurchased,
+  numberOfItems,
+  category
+) => {
+  // ... existing logic ...
+  listItem.setAttribute("data-id", uniqueKey || ''); // Use uniqueKey for data-id
+  // ... existing logic ...
+};
+```
+
+### Conclusion
+
+With these changes:
+- Your shopping list items will be automatically sorted by category.
+- The `displaySortedItems` function sorts the items and then calls `createElements` for each item.
+- Each item in Firebase will have its unique key stored, making it easier to identify and manage items.
+
+This approach enhances the user experience by organizing the shopping list in a more structured and user-friendly manner.
