@@ -12,8 +12,17 @@ Shopping List
 3. Once the shopping list is complete, the user will add the price of the item purchased and check the checkbox to indicate the item has been purchased. 
 4. The price of each item is to be stored and added in a different variable for later use
  */
+// Import Security Rules Modules
+import {
+  getAuth,
+  signInWithPopup,
+  GoogleAuthProvider,
+} from "https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js";
+
 // Install Firebase
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
+
+// Import essential modules
 import {
   getDatabase,
   ref,
@@ -23,15 +32,61 @@ import {
   update,
 } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js";
 
+
+
+// Initialize database
 const appSettings = {
-  databaseURL: "https://shoppinglist-b0a3b-default-rtdb.firebaseio.com/",
+  apiKey: "AIzaSyBYPLSb6JNF4ZNNLQDFNiAMmEBYvtF0wXg",
+  authDomain: "shoppinglist-b0a3b.firebaseapp.com",
+  databaseURL: "https://shoppinglist-b0a3b-default-rtdb.firebaseio.com",
+  projectId: "shoppinglist-b0a3b",
+  storageBucket: "shoppinglist-b0a3b.appspot.com",
+  messagingSenderId: "120255006474",
+  appId: "1:120255006474:web:ff11944ea632765b02dcf3"
 };
 
+// Connect to database - set variables
 const app = initializeApp(appSettings);
 const database = getDatabase(app);
+const auth = getAuth(app);
+const provider = new GoogleAuthProvider
 
 // Create a reference to the database
 const dbRef = ref(database, "shoppingList");
+
+// Get button element to sing with Google
+document.getElementById('googleSignInButton').addEventListener('click', signInWithGoogle);
+
+// ***!SECTION Save signInWithGoogle function. Read documentation and implement security rules and Google Sign In
+// Sign in with Google
+function signInWithGoogle() {
+  const auth = getAuth();
+  const provider = new GoogleAuthProvider();
+
+  signInWithPopup(auth, provider)
+    .then((result) => {
+      // This gives you a Google Access Token. You can use it to access Google APIs.
+      const credential = GoogleAuthProvider.credentialFromResult(result);
+      const token = credential.accessToken;
+
+      // The signed-in user info.
+      const user = result.user;
+      console.log("User signed in: ", user);
+      // Handle the signed-in user here.
+    })
+    .catch((error) => {
+      // Handle Errors here.
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      // The email of the user's account used.
+      const email = error.email;
+      // The AuthCredential type that was used.
+      const credential = GoogleAuthProvider.credentialFromError(error);
+      console.error("Error signing in with Google: ", errorMessage);
+      // Handle errors here.
+    });
+}
+
 
 onValue(dbRef, (snapshot) => {
   listContainerDIV.innerHTML = ""; // Clear existing items
@@ -108,16 +163,27 @@ btnEl.addEventListener("click", function () {
 
   // Only proceed if both fields have values
   if (inputElValue && inputFixedPriceElValue) {
-    createElements(inputElValue, inputFixedPriceElValue); // Create list elements
+    const numberOfItems = 1; // Default value for number of items
+    const fixedPriceValue = parseFloat(inputFixedPriceElValue) || 0;
+    const actualPriceValue = fixedPriceValue * numberOfItems;
+
+    createElements(
+      inputElValue,
+      fixedPriceValue,
+      uniqueId,
+      actualPriceValue,
+      false,
+      numberOfItems,
+      listContainerDIV
+    ); // Create list elements
 
     const newItem = {
       item: inputElValue,
-      fixedPrice: inputFixedPriceElValue,
-      actualPrice: 0, // Initialize with a default value
-      numberOfItems: 0, // Initialize with a default value
+      fixedPrice: fixedPriceValue,
+      actualPrice: actualPriceValue,
+      numberOfItems: numberOfItems,
       isPurchased: false,
-      // category: selectedCategory // Add the selected category here
-      categoryContainer, // Changed parameter
+      categoryContainer: listContainerDIV,
     };
     // When you create a new item and push it to the database:
     push(dbRef, newItem).then((snapshot) => {
@@ -134,7 +200,7 @@ btnEl.addEventListener("click", function () {
   }
 });
 
-inputEl.value = ""; //Cledar input field after user clicks the button
+inputEl.value = ""; // Clear input field after user clicks the button
 // Create a function to dunamically create and append elements to the DOM
 /**
  * Creates and appends elements to the list container.

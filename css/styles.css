@@ -12,6 +12,14 @@ body {
     padding: 1.25em;
 }
 
+.google-wrap{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.25em;
+}
+
 #input-item-container {
     display: flex;
     flex-direction: column;
@@ -41,8 +49,6 @@ body {
     box-shadow: 0 .125em .25em rgba(0, 0, 0, 0.1);
     font-family: 'Roboto', sans-serif;
 }
-
-
 
 .category-container {
     display: flex;
@@ -88,7 +94,6 @@ body {
 .list-item-container input[type="checkbox"] {
     margin-left: 0.625em;
     align-items: center;
-
 }
 
 button {
@@ -96,11 +101,22 @@ button {
     color: #fff;
     border: none;
     padding: 0.625em 1.25em;
-    border-radius: 5px;
+    border-radius: 0.3125em;
     cursor: pointer;
     width: 100%;
     margin-top: 0.3125em;
+}
 
+.googleSignInButton{
+    background: #4285F4;
+    color: #fff;
+    border: none;
+    padding: 0.625em 1.25em;
+    border-radius: 0.3125em;
+    cursor: pointer;
+    width: 100%;
+    max-width: 600px;
+margin: auto;
 }
 
 button:hover {
