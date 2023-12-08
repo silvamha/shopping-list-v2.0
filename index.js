@@ -48,6 +48,8 @@ const appSettings = {
 // Connect to database - set variables
 const app = initializeApp(appSettings);
 const database = getDatabase(app);
+
+// Set Google Log In variables
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider
 
@@ -57,7 +59,7 @@ const dbRef = ref(database, "shoppingList");
 // Get button element to sing with Google
 document.getElementById('googleSignInButton').addEventListener('click', signInWithGoogle);
 
-// ***!SECTION Save signInWithGoogle function. Read documentation and implement security rules and Google Sign In
+// ***!SECTION - STart -  Save signInWithGoogle function. Read documentation and implement security rules and Google Sign In
 // Sign in with Google
 function signInWithGoogle() {
   const auth = getAuth();
@@ -86,7 +88,7 @@ function signInWithGoogle() {
       // Handle errors here.
     });
 }
-
+// ****!SECTION - End
 
 onValue(dbRef, (snapshot) => {
   listContainerDIV.innerHTML = ""; // Clear existing items
