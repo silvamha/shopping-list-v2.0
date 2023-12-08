@@ -359,3 +359,5 @@ function updateItemInFirebase(itemId, updateObject) {
     console.error("Error updating item in Firebase", error);
   });
 }
+
+
